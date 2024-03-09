@@ -62,7 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 transitionBuilder: (Widget child, Animation<double> animation) {
                   return SlideTransition(
                     position: Tween(
-                      begin: Offset(0.0, -1.0),
+                      begin: Offset(0.0, -1.2),
                       end: Offset(0.0, 0.0),
                     ).animate(animation),
                     child: child,

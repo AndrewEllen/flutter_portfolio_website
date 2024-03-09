@@ -79,7 +79,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
           height: value,
           child: AppBar(
             leading: AnimatedSwitcher(
-              duration: const Duration(milliseconds: 250),
+              duration: duration,
               transitionBuilder: (Widget child, Animation<double> animation) {
                 return SlideTransition(
                   position: Tween(
@@ -111,7 +111,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
           height: value,
           child: AppBar(
             leading: AnimatedSwitcher(
-              duration: const Duration(milliseconds: 250),
+              duration: duration,
               transitionBuilder: (Widget child, Animation<double> animation) {
                 return SlideTransition(
                   position: Tween(
