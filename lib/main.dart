@@ -48,14 +48,57 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
 
     var shortestSide = MediaQuery.of(context).size.shortestSide;
+    bool _desktopMode = shortestSide >= 600;
     print(shortestSide);
+    print(_desktopMode);
 
 
     return Scaffold(
       appBar: CustomAppBar(scrollController: scrollController, title: "Andrew Ellen",),
+      bottomNavigationBar: !_desktopMode ? ClipRRect(
+        child: Row(
+          children: [
+        
+            AnimatedSwitcher(
+              duration: const Duration(milliseconds: 250),
+              transitionBuilder: (Widget child, Animation<double> animation) {
+                return SlideTransition(
+                  position: Tween(
+                    begin: Offset(0.0, -1.2),
+                    end: Offset(0.0, 0.0),
+                  ).animate(animation),
+                  child: child,
+                );
+              },
+              child: context.watch<ThemeProvider>().isScrolled ? IconButton(
+                onPressed: () => context.read<ThemeProvider>().changeThemeMode(),
+                icon: const Icon(Icons.sunny),
+              ) : null,
+            ),
+        
+            Expanded(
+              child: NavigationBar(
+              
+              
+                destinations: const [
+                  NavigationDestination(
+                    icon: Icon(Icons.person),
+                    label: "About Me",
+                  ),
+                  NavigationDestination(
+                    icon: Icon(Icons.book),
+                    label: "Portfolio",
+                  ),
+                ],
+                selectedIndex: 0,
+              ),
+            ),
+          ],
+        ),
+      ) : const SizedBox.shrink(),
       body: Row(
         children: [
-          NavigationRail(
+          _desktopMode ? NavigationRail(
             backgroundColor: Theme.of(context).colorScheme.inversePrimary,
               leading: AnimatedSwitcher(
                 duration: const Duration(milliseconds: 250),
@@ -84,11 +127,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ],
               selectedIndex: 0,
-          ),
+          ) : const SizedBox.shrink(),
 
           Expanded(
             child: Column(
-              mainAxisSize: MainAxisSize.max,
+              //mainAxisSize: MainAxisSize.max,
               children: [
 
                 Expanded(
