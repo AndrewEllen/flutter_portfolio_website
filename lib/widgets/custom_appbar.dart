@@ -39,21 +39,21 @@ class _CustomAppBarState extends State<CustomAppBar> {
 
     if (scrollController.position.pixels == scrollController.position.minScrollExtent) {
 
-      print("top");
-
       setState(() {
         _display = true;
       });
+
+      context.read<ThemeProvider>().changeScrollState(false);
 
     }
 
     if (scrollController.position.pixels > scrollController.position.minScrollExtent && _display) {
 
-      print("scrolled");
-
       setState(() {
         _display = false;
       });
+
+      context.read<ThemeProvider>().changeScrollState(true);
 
     }
 
@@ -67,18 +67,35 @@ class _CustomAppBarState extends State<CustomAppBar> {
     super.dispose();
   }
 
+  Duration duration = const Duration(milliseconds: 250);
+
   @override
   Widget build(BuildContext context) {
     return _display ? TweenAnimationBuilder(
       tween: Tween<double>(begin: 0 , end: widget.preferredSize.height),
-      duration: const Duration(milliseconds: 100),
+      duration: duration,
       builder: (BuildContext context, double value, Widget? child) {
         return SizedBox(
           height: value,
           child: AppBar(
-            leading: IconButton(
-              onPressed: () => context.read<ThemeProvider>().changeThemeMode(),
-              icon: const Icon(Icons.sunny),
+            leading: AnimatedSwitcher(
+              duration: const Duration(milliseconds: 250),
+              transitionBuilder: (Widget child, Animation<double> animation) {
+                return SlideTransition(
+                  position: Tween(
+                    begin: const Offset(0.0, 1.0),
+                    end: const Offset(0.0, 0.0),
+                  ).animate(animation),
+                  child: child,
+                );
+              },
+              child: !context.watch<ThemeProvider>().isScrolled ? Padding(
+                padding: const EdgeInsets.only(left: 20.0),
+                child: IconButton(
+                  onPressed: () => context.read<ThemeProvider>().changeThemeMode(),
+                  icon: const Icon(Icons.sunny),
+                ),
+              ) : null,
             ),
             automaticallyImplyLeading: false,
             backgroundColor: Theme.of(context).colorScheme.inversePrimary.withOpacity(1),
@@ -88,14 +105,29 @@ class _CustomAppBarState extends State<CustomAppBar> {
       },
     ) : TweenAnimationBuilder(
       tween: Tween<double>(begin: widget.preferredSize.height , end: 0),
-      duration: const Duration(milliseconds: 100),
+      duration: duration,
       builder: (BuildContext context, double value, Widget? child) {
         return SizedBox(
           height: value,
           child: AppBar(
-            leading: IconButton(
-              onPressed: () => context.read<ThemeProvider>().changeThemeMode(),
-              icon: const Icon(Icons.sunny),
+            leading: AnimatedSwitcher(
+              duration: const Duration(milliseconds: 250),
+              transitionBuilder: (Widget child, Animation<double> animation) {
+                return SlideTransition(
+                  position: Tween(
+                    begin: const Offset(0.0, 1.0),
+                    end: const Offset(0.0, 0.0),
+                  ).animate(animation),
+                  child: child,
+                );
+              },
+              child: !context.watch<ThemeProvider>().isScrolled ? Padding(
+                padding: const EdgeInsets.only(left: 20.0),
+                child: IconButton(
+                  onPressed: () => context.read<ThemeProvider>().changeThemeMode(),
+                  icon: const Icon(Icons.sunny),
+                ),
+              ) : null,
             ),
             automaticallyImplyLeading: false,
             backgroundColor: Theme.of(context).colorScheme.inversePrimary.withOpacity(1),

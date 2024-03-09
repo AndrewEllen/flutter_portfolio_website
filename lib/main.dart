@@ -44,9 +44,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   final ScrollController scrollController = ScrollController();
 
-
-
-
   @override
   Widget build(BuildContext context) {
 
@@ -60,9 +57,21 @@ class _MyHomePageState extends State<MyHomePage> {
         children: [
           NavigationRail(
             backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-              leading: IconButton(
-                onPressed: () => context.read<ThemeProvider>().changeThemeMode(),
-                icon: const Icon(Icons.sunny),
+              leading: AnimatedSwitcher(
+                duration: const Duration(milliseconds: 250),
+                transitionBuilder: (Widget child, Animation<double> animation) {
+                  return SlideTransition(
+                    position: Tween(
+                      begin: Offset(0.0, -1.0),
+                      end: Offset(0.0, 0.0),
+                    ).animate(animation),
+                    child: child,
+                  );
+                },
+                child: context.watch<ThemeProvider>().isScrolled ? IconButton(
+                  onPressed: () => context.read<ThemeProvider>().changeThemeMode(),
+                  icon: const Icon(Icons.sunny),
+                ) : null,
               ),
               destinations: const [
                 NavigationRailDestination(
