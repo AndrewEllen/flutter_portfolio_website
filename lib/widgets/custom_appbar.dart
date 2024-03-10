@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/theme_provider.dart';
@@ -38,7 +39,9 @@ class _CustomAppBarState extends State<CustomAppBar> {
 
   void scrollListener() {
 
-    if (scrollController.position.pixels == scrollController.position.minScrollExtent) {
+    if (scrollController.position.userScrollDirection == ScrollDirection.forward && !_display) {
+
+      print("Forward");
 
       setState(() {
         _display = true;
@@ -48,7 +51,9 @@ class _CustomAppBarState extends State<CustomAppBar> {
 
     }
 
-    if (scrollController.position.pixels > scrollController.position.minScrollExtent && _display) {
+    if (scrollController.position.userScrollDirection == ScrollDirection.reverse && _display) {
+
+      print("Reverse");
 
       setState(() {
         _display = false;
@@ -73,6 +78,9 @@ class _CustomAppBarState extends State<CustomAppBar> {
   @override
   Widget build(BuildContext context) {
 
+    var shortestSide = MediaQuery.of(context).size.shortestSide;
+    bool phoneMode = shortestSide < 600;
+
     if (!context.watch<ThemeProvider>().isScrolled) {
       _display = true;
     }
@@ -85,7 +93,13 @@ class _CustomAppBarState extends State<CustomAppBar> {
           height: value,
           child: AppBar(
             elevation: 2,
-            actions: [AnimatedSwitcher(
+            actions: phoneMode ? [IconButton(
+              onPressed: () => context.read<ThemeProvider>().changeThemeMode(),
+              icon: const Icon(
+                Icons.sunny,
+                color: Colors.white,
+              ),
+            )] : [AnimatedSwitcher(
               duration: duration,
               transitionBuilder: (Widget child, Animation<double> animation) {
                 return SlideTransition(
@@ -125,7 +139,13 @@ class _CustomAppBarState extends State<CustomAppBar> {
         return SizedBox(
           height: value,
           child: AppBar(
-            actions: [AnimatedSwitcher(
+            actions: phoneMode ? [IconButton(
+              onPressed: () => context.read<ThemeProvider>().changeThemeMode(),
+              icon: const Icon(
+                Icons.sunny,
+                color: Colors.white,
+              ),
+            )] : [AnimatedSwitcher(
               duration: duration,
               transitionBuilder: (Widget child, Animation<double> animation) {
                 return SlideTransition(

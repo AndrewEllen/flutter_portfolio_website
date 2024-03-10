@@ -69,29 +69,6 @@ class _MyHomePageState extends State<MyHomePage> {
           ? ClipRRect(
               child: Row(
                 children: [
-                  AnimatedSwitcher(
-                    duration: const Duration(milliseconds: 250),
-                    transitionBuilder:
-                        (Widget child, Animation<double> animation) {
-                      return SlideTransition(
-                        position: Tween(
-                          begin: const Offset(0.0, -1.2),
-                          end: const Offset(0.0, 0.0),
-                        ).animate(animation),
-                        child: child,
-                      );
-                    },
-                    child: context.watch<ThemeProvider>().isScrolled
-                        ? IconButton(
-                            onPressed: () =>
-                                context.read<ThemeProvider>().changeThemeMode(),
-                            icon: const Icon(
-                              Icons.sunny,
-                              color: Colors.white,
-                            ),
-                          )
-                        : null,
-                  ),
                   Expanded(
                     child: NavigationBarTheme(
                       data: NavigationBarThemeData(
