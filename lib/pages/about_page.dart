@@ -11,7 +11,7 @@ class AboutPage extends StatelessWidget {
       children: [
 
         Text(
-          "I'm a full-stack developer",
+          "I'm a full-stack developer with a BSc in Software Development",
           style: TextStyle(
             fontSize: 24,
           ),

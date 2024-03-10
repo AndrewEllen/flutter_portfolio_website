@@ -105,6 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         setState(() {
                           currentPageIndex = index;
                         });
+                        context.read<ThemeProvider>().changeScrollState(false);
                       },
                       selectedIndex: currentPageIndex,
                     ),
@@ -115,47 +116,6 @@ class _MyHomePageState extends State<MyHomePage> {
           : const SizedBox.shrink(),
       body: Row(
         children: [
-          desktopMode
-              ? NavigationRail(
-                  backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-                  leading: AnimatedSwitcher(
-                    duration: const Duration(milliseconds: 250),
-                    transitionBuilder:
-                        (Widget child, Animation<double> animation) {
-                      return SlideTransition(
-                        position: Tween(
-                          begin: const Offset(0.0, -1.2),
-                          end: const Offset(0.0, 0.0),
-                        ).animate(animation),
-                        child: child,
-                      );
-                    },
-                    child: context.watch<ThemeProvider>().isScrolled
-                        ? IconButton(
-                            onPressed: () =>
-                                context.read<ThemeProvider>().changeThemeMode(),
-                            icon: const Icon(Icons.sunny),
-                          )
-                        : null,
-                  ),
-                  destinations: const [
-                    NavigationRailDestination(
-                      icon: Icon(Icons.person),
-                      label: Text("About Me"),
-                    ),
-                    NavigationRailDestination(
-                      icon: Icon(Icons.book),
-                      label: Text("Portfolio"),
-                    ),
-                  ],
-                  onDestinationSelected: (int index) {
-                    setState(() {
-                      currentPageIndex = index;
-                    });
-                  },
-                  selectedIndex: currentPageIndex,
-                )
-              : const SizedBox.shrink(),
           Expanded(
             child: ListView(
               shrinkWrap: false,
@@ -175,6 +135,48 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             ),
           ),
+          desktopMode
+              ? NavigationRail(
+            backgroundColor: Theme.of(context).colorScheme.surface,
+            leading: AnimatedSwitcher(
+              duration: const Duration(milliseconds: 250),
+              transitionBuilder:
+                  (Widget child, Animation<double> animation) {
+                return SlideTransition(
+                  position: Tween(
+                    begin: const Offset(0.0, -1.2),
+                    end: const Offset(0.0, 0.0),
+                  ).animate(animation),
+                  child: child,
+                );
+              },
+              child: context.watch<ThemeProvider>().isScrolled
+                  ? IconButton(
+                onPressed: () =>
+                    context.read<ThemeProvider>().changeThemeMode(),
+                icon: const Icon(Icons.sunny),
+              )
+                  : null,
+            ),
+            destinations: const [
+              NavigationRailDestination(
+                icon: Icon(Icons.person),
+                label: Text("About Me"),
+              ),
+              NavigationRailDestination(
+                icon: Icon(Icons.book),
+                label: Text("Portfolio"),
+              ),
+            ],
+            onDestinationSelected: (int index) {
+              setState(() {
+                currentPageIndex = index;
+              });
+              context.read<ThemeProvider>().changeScrollState(false);
+            },
+            selectedIndex: currentPageIndex,
+          )
+              : const SizedBox.shrink(),
         ],
       ),
     );
