@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/theme_provider.dart';
+import '../theme.dart';
 
 class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
   CustomAppBar({super.key, required this.scrollController, required this.title});
@@ -99,13 +100,21 @@ class _CustomAppBarState extends State<CustomAppBar> {
                 padding: const EdgeInsets.only(right: 20.0),
                 child: IconButton(
                   onPressed: () => context.read<ThemeProvider>().changeThemeMode(),
-                  icon: const Icon(Icons.sunny),
+                  icon: const Icon(
+                    Icons.sunny,
+                    color: Colors.white,
+                  ),
                 ),
               ) : null,
             )],
             automaticallyImplyLeading: false,
-            backgroundColor: Theme.of(context).colorScheme.surface,
-            title: Text(widget.title),
+            backgroundColor: appBarColour,
+            title: Text(
+              widget.title,
+              style: const TextStyle(
+                color: Colors.white,
+              ),
+            ),
           ),
         );
       },
@@ -131,13 +140,21 @@ class _CustomAppBarState extends State<CustomAppBar> {
                 padding: const EdgeInsets.only(right: 20.0),
                 child: IconButton(
                   onPressed: () => context.read<ThemeProvider>().changeThemeMode(),
-                  icon: const Icon(Icons.sunny),
+                  icon: const Icon(
+                    Icons.sunny,
+                    color: Colors.white,
+                  ),
                 ),
               ) : null,
             )],
             automaticallyImplyLeading: false,
-            backgroundColor: Theme.of(context).colorScheme.surface,
-            title: Text(widget.title),
+            backgroundColor: appBarColour,
+            title: Text(
+              widget.title,
+              style: const TextStyle(
+                color: Colors.white,
+              ),
+            ),
           ),
         );
       },

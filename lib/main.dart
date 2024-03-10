@@ -85,7 +85,10 @@ class _MyHomePageState extends State<MyHomePage> {
                         ? IconButton(
                             onPressed: () =>
                                 context.read<ThemeProvider>().changeThemeMode(),
-                            icon: const Icon(Icons.sunny),
+                            icon: const Icon(
+                              Icons.sunny,
+                              color: Colors.white,
+                            ),
                           )
                         : null,
                   ),
@@ -93,11 +96,23 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: NavigationBar(
                       destinations: const [
                         NavigationDestination(
-                          icon: Icon(Icons.person),
+                          selectedIcon: Icon(
+                            Icons.person,
+                          ),
+                          icon: Icon(
+                            Icons.person,
+                            color: Colors.white,
+                          ),
                           label: "About Me",
                         ),
                         NavigationDestination(
-                          icon: Icon(Icons.book),
+                          selectedIcon: Icon(
+                            Icons.book,
+                          ),
+                          icon: Icon(
+                            Icons.book,
+                            color: Colors.white,
+                          ),
                           label: "Portfolio",
                         ),
                       ],
@@ -137,7 +152,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           desktopMode
               ? NavigationRail(
-            backgroundColor: Theme.of(context).colorScheme.surface,
+            backgroundColor: appBarColour,
             leading: AnimatedSwitcher(
               duration: const Duration(milliseconds: 250),
               transitionBuilder:
@@ -154,17 +169,32 @@ class _MyHomePageState extends State<MyHomePage> {
                   ? IconButton(
                 onPressed: () =>
                     context.read<ThemeProvider>().changeThemeMode(),
-                icon: const Icon(Icons.sunny),
+                icon: const Icon(
+                  Icons.sunny,
+                  color: Colors.white,
+                ),
               )
                   : null,
             ),
             destinations: const [
               NavigationRailDestination(
-                icon: Icon(Icons.person),
+                selectedIcon: Icon(
+                  Icons.person,
+                ),
+                icon: Icon(
+                  Icons.person,
+                  color: Colors.white,
+                ),
                 label: Text("About Me"),
               ),
               NavigationRailDestination(
-                icon: Icon(Icons.book),
+                selectedIcon: Icon(
+                  Icons.book,
+                ),
+                icon: Icon(
+                  Icons.book,
+                  color: Colors.white,
+                ),
                 label: Text("Portfolio"),
               ),
             ],

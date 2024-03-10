@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+const Color appBarColour = Color.fromRGBO(40, 40, 40, 1.0);
+
 const lightColorScheme = ColorScheme(
   brightness: Brightness.light,
   primary: Color(0xFF3C49E2),
@@ -20,7 +22,7 @@ const lightColorScheme = ColorScheme(
   onErrorContainer: Color(0xFF410002),
   background: Color(0xFFFFFBFF),
   onBackground: Color(0xFF1B1B1F),
-  surface: Color(0xFFFFFFFF),
+  surface: Color(0xFF9BE1FF),
   onSurface: Color(0xFF1B1B1F),
   surfaceVariant: Color(0xFFE3E1EC),
   onSurfaceVariant: Color(0xFF46464F),
