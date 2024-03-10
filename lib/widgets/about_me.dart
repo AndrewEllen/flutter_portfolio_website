@@ -11,8 +11,6 @@ class AboutMeWidget extends StatelessWidget {
     var shortestSide = MediaQuery.of(context).size.shortestSide;
     bool desktopMode = shortestSide >= 850;
 
-    print(shortestSide);
-
     final TextStyle defaultTextStyle = TextStyle(
       color: Theme.of(context).textTheme.bodyMedium?.color,
       fontSize: Theme.of(context).textTheme.headlineSmall?.fontSize,
@@ -43,12 +41,12 @@ class AboutMeWidget extends StatelessWidget {
                         decoration: const BoxDecoration(
                             shape: BoxShape.circle,
                             color: Colors.white,
-                          //image: DecorationImage(
-                          //  fit: BoxFit.fill,
-                          //image: AssetImage(
-                          //  "me.jpg",
-                          //),
-                          //)
+                          image: DecorationImage(
+                            fit: BoxFit.fitWidth,
+                          image: AssetImage(
+                            "me.jpg",
+                          ),
+                          )
                         ),
                       ),
                     ),
@@ -114,12 +112,12 @@ class AboutMeWidget extends StatelessWidget {
                       decoration: const BoxDecoration(
                           shape: BoxShape.circle,
                           color: Colors.white,
-                          //image: DecorationImage(
-                          //  fit: BoxFit.fill,
-                            //image: AssetImage(
-                            //  "me.jpg",
-                            //),
-                          //)
+                          image: DecorationImage(
+                            fit: BoxFit.fitWidth,
+                            image: AssetImage(
+                              "me.jpg",
+                            ),
+                          ),
                       ),
                     ),
                   ),
