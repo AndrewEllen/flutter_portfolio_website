@@ -91,42 +91,44 @@ class _CustomAppBarState extends State<CustomAppBar> {
       builder: (BuildContext context, double value, Widget? child) {
         return SizedBox(
           height: value,
-          child: AppBar(
-            elevation: 2,
-            actions: phoneMode ? [IconButton(
-              onPressed: () => context.read<ThemeProvider>().changeThemeMode(),
-              icon: const Icon(
-                Icons.sunny,
-                color: Colors.white,
-              ),
-            )] : [AnimatedSwitcher(
-              duration: duration,
-              transitionBuilder: (Widget child, Animation<double> animation) {
-                return SlideTransition(
-                  position: Tween(
-                    begin: const Offset(0.0, 1.0),
-                    end: const Offset(0.0, 0.0),
-                  ).animate(animation),
-                  child: child,
-                );
-              },
-              child: !context.watch<ThemeProvider>().isScrolled ? Padding(
-                padding: const EdgeInsets.only(right: 20.0),
-                child: IconButton(
-                  onPressed: () => context.read<ThemeProvider>().changeThemeMode(),
-                  icon: const Icon(
-                    Icons.sunny,
-                    color: Colors.white,
-                  ),
+          child: ClipRRect(
+            child: AppBar(
+              elevation: 2,
+              actions: phoneMode ? [IconButton(
+                onPressed: () => context.read<ThemeProvider>().changeThemeMode(),
+                icon: const Icon(
+                  Icons.sunny,
+                  color: Colors.white,
                 ),
-              ) : null,
-            )],
-            automaticallyImplyLeading: false,
-            backgroundColor: appBarColour,
-            title: Text(
-              widget.title,
-              style: const TextStyle(
-                color: Colors.white,
+              )] : [AnimatedSwitcher(
+                duration: duration,
+                transitionBuilder: (Widget child, Animation<double> animation) {
+                  return SlideTransition(
+                    position: Tween(
+                      begin: const Offset(0.0, 1.0),
+                      end: const Offset(0.0, 0.0),
+                    ).animate(animation),
+                    child: child,
+                  );
+                },
+                child: !context.watch<ThemeProvider>().isScrolled ? Padding(
+                  padding: const EdgeInsets.only(right: 20.0),
+                  child: IconButton(
+                    onPressed: () => context.read<ThemeProvider>().changeThemeMode(),
+                    icon: const Icon(
+                      Icons.sunny,
+                      color: Colors.white,
+                    ),
+                  ),
+                ) : null,
+              )],
+              automaticallyImplyLeading: false,
+              backgroundColor: appBarColour,
+              title: Text(
+                widget.title,
+                style: const TextStyle(
+                  color: Colors.white,
+                ),
               ),
             ),
           ),
@@ -138,41 +140,43 @@ class _CustomAppBarState extends State<CustomAppBar> {
       builder: (BuildContext context, double value, Widget? child) {
         return SizedBox(
           height: value,
-          child: AppBar(
-            actions: phoneMode ? [IconButton(
-              onPressed: () => context.read<ThemeProvider>().changeThemeMode(),
-              icon: const Icon(
-                Icons.sunny,
-                color: Colors.white,
-              ),
-            )] : [AnimatedSwitcher(
-              duration: duration,
-              transitionBuilder: (Widget child, Animation<double> animation) {
-                return SlideTransition(
-                  position: Tween(
-                    begin: const Offset(0.0, 1.0),
-                    end: const Offset(0.0, 0.0),
-                  ).animate(animation),
-                  child: child,
-                );
-              },
-              child: !context.watch<ThemeProvider>().isScrolled ? Padding(
-                padding: const EdgeInsets.only(right: 20.0),
-                child: IconButton(
-                  onPressed: () => context.read<ThemeProvider>().changeThemeMode(),
-                  icon: const Icon(
-                    Icons.sunny,
-                    color: Colors.white,
-                  ),
+          child: ClipRRect(
+            child: AppBar(
+              actions: phoneMode ? [IconButton(
+                onPressed: () => context.read<ThemeProvider>().changeThemeMode(),
+                icon: const Icon(
+                  Icons.sunny,
+                  color: Colors.white,
                 ),
-              ) : null,
-            )],
-            automaticallyImplyLeading: false,
-            backgroundColor: appBarColour,
-            title: Text(
-              widget.title,
-              style: const TextStyle(
-                color: Colors.white,
+              )] : [AnimatedSwitcher(
+                duration: duration,
+                transitionBuilder: (Widget child, Animation<double> animation) {
+                  return SlideTransition(
+                    position: Tween(
+                      begin: const Offset(0.0, 1.0),
+                      end: const Offset(0.0, 0.0),
+                    ).animate(animation),
+                    child: child,
+                  );
+                },
+                child: !context.watch<ThemeProvider>().isScrolled ? Padding(
+                  padding: const EdgeInsets.only(right: 20.0),
+                  child: IconButton(
+                    onPressed: () => context.read<ThemeProvider>().changeThemeMode(),
+                    icon: const Icon(
+                      Icons.sunny,
+                      color: Colors.white,
+                    ),
+                  ),
+                ) : null,
+              )],
+              automaticallyImplyLeading: false,
+              backgroundColor: appBarColour,
+              title: Text(
+                widget.title,
+                style: const TextStyle(
+                  color: Colors.white,
+                ),
               ),
             ),
           ),
