@@ -1,6 +1,8 @@
 
 import 'package:flutter/material.dart';
 
+import '../widgets/about_me.dart';
+
 class AboutPage extends StatelessWidget {
   const AboutPage({Key? key}) : super(key: key);
 
@@ -10,12 +12,7 @@ class AboutPage extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
 
-        Text(
-          "I'm a full-stack developer with a BSc in Software Development",
-          style: TextStyle(
-            fontSize: 24,
-          ),
-        ),
+        AboutMeWidget(),
 
       ],
     );
