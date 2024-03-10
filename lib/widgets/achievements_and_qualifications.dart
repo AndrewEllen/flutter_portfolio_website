@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_portfolio_website/widgets/resuable_widgets/list_item.dart';
 
@@ -16,10 +17,11 @@ class AchievementsAndQualifications extends StatelessWidget {
     return Align(
       alignment: Alignment.centerLeft,
       child: Padding(
-        padding: EdgeInsets.all(24.0),
+        padding: const EdgeInsets.all(24.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+
             Padding(
               padding: const EdgeInsets.only(bottom: 8.0),
               child: Text(
