@@ -93,36 +93,46 @@ class _MyHomePageState extends State<MyHomePage> {
                         : null,
                   ),
                   Expanded(
-                    child: NavigationBar(
-                      destinations: const [
-                        NavigationDestination(
-                          selectedIcon: Icon(
-                            Icons.person,
-                          ),
-                          icon: Icon(
-                            Icons.person,
-                            color: Colors.white,
-                          ),
-                          label: "About Me",
+                    child: NavigationBarTheme(
+                      data: NavigationBarThemeData(
+                        labelTextStyle: MaterialStateProperty.resolveWith<TextStyle>(
+                              (Set<MaterialState> states) => states.contains(MaterialState.selected)
+                              ? const TextStyle(color: Colors.white)
+                              : const TextStyle(color: Colors.white),
                         ),
-                        NavigationDestination(
-                          selectedIcon: Icon(
-                            Icons.book,
+                      ),
+                      child: NavigationBar(
+                        backgroundColor: appBarColour,
+                        destinations: const [
+                          NavigationDestination(
+                            selectedIcon: Icon(
+                              Icons.person,
+                            ),
+                            icon: Icon(
+                              Icons.person,
+                              color: Colors.white,
+                            ),
+                            label: "About Me",
                           ),
-                          icon: Icon(
-                            Icons.book,
-                            color: Colors.white,
+                          NavigationDestination(
+                            selectedIcon: Icon(
+                              Icons.book,
+                            ),
+                            icon: Icon(
+                              Icons.book,
+                              color: Colors.white,
+                            ),
+                            label: "Portfolio",
                           ),
-                          label: "Portfolio",
-                        ),
-                      ],
-                      onDestinationSelected: (int index) {
-                        setState(() {
-                          currentPageIndex = index;
-                        });
-                        context.read<ThemeProvider>().changeScrollState(false);
-                      },
-                      selectedIndex: currentPageIndex,
+                        ],
+                        onDestinationSelected: (int index) {
+                          setState(() {
+                            currentPageIndex = index;
+                          });
+                          context.read<ThemeProvider>().changeScrollState(false);
+                        },
+                        selectedIndex: currentPageIndex,
+                      ),
                     ),
                   ),
                 ],
@@ -152,6 +162,8 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           desktopMode
               ? NavigationRail(
+            selectedLabelTextStyle: const TextStyle(color: Colors.white),
+            unselectedLabelTextStyle: const TextStyle(color: Colors.white),
             backgroundColor: appBarColour,
             leading: AnimatedSwitcher(
               duration: const Duration(milliseconds: 250),
@@ -176,6 +188,7 @@ class _MyHomePageState extends State<MyHomePage> {
               )
                   : null,
             ),
+            labelType: NavigationRailLabelType.all,
             destinations: const [
               NavigationRailDestination(
                 selectedIcon: Icon(
