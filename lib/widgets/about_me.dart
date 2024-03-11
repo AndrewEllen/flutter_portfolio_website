@@ -45,7 +45,7 @@ class AboutMeWidget extends StatelessWidget {
                               image: DecorationImage(
                                 fit: BoxFit.fitWidth,
                               image: AssetImage(
-                                "me.jpg",
+                                "asset_folder/me.jpg",
                               ),
                               )
                             ),
@@ -116,7 +116,7 @@ class AboutMeWidget extends StatelessWidget {
                               image: DecorationImage(
                                 fit: BoxFit.fitWidth,
                                 image: AssetImage(
-                                  "me.jpg",
+                                  "asset_folder/me.jpg",
                                 ),
                               ),
                           ),
