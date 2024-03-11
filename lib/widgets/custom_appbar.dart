@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
@@ -7,8 +6,8 @@ import '../providers/theme_provider.dart';
 import '../theme.dart';
 
 class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
-  CustomAppBar({super.key, required this.scrollController, required this.title});
-  late ScrollController scrollController;
+  const CustomAppBar({super.key, required this.scrollController, required this.title});
+  final ScrollController scrollController;
   final String title;
 
   @override
@@ -17,15 +16,14 @@ class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
   @override
   State<CustomAppBar> createState() => _CustomAppBarState();
 
-  @override
-  // TODO: implement child
-  Widget get child => throw UnimplementedError();
 }
 
 class _CustomAppBarState extends State<CustomAppBar> {
 
   late ScrollController scrollController;
   late bool _display = true;
+
+  late double pixelPosition = 0;
 
   @override
   void initState() {
@@ -41,8 +39,6 @@ class _CustomAppBarState extends State<CustomAppBar> {
 
     if (scrollController.position.userScrollDirection == ScrollDirection.forward && !_display) {
 
-      print("Forward");
-
       setState(() {
         _display = true;
       });
@@ -52,8 +48,6 @@ class _CustomAppBarState extends State<CustomAppBar> {
     }
 
     if (scrollController.position.userScrollDirection == ScrollDirection.reverse && _display) {
-
-      print("Reverse");
 
       setState(() {
         _display = false;

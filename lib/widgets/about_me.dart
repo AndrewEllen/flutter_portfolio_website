@@ -1,9 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class AboutMeWidget extends StatelessWidget {
-  AboutMeWidget({super.key});
+  const AboutMeWidget({super.key});
 
 
   @override
@@ -77,8 +75,8 @@ class AboutMeWidget extends StatelessWidget {
                                 text: "Andrew",
                                 style: defaultTextStyle.copyWith(fontWeight: FontWeight.bold),
                               ),
-                              const TextSpan(text: ". I'm a fullstack Software Developer with experience in creating and designing "
-                                  "web and mobile apps."),
+                              const TextSpan(text: ". I'm a fullstack Software Developer with experience in "
+                                  "web and mobile app development."),
                             ]
                         )),
                   ),

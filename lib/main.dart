@@ -1,9 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_portfolio_website/pages/about_page.dart';
 import 'package:flutter_portfolio_website/pages/portfolio_page.dart';
 import 'package:flutter_portfolio_website/providers/theme_provider.dart';
+import 'package:flutter_portfolio_website/scroll_animator.dart';
 import 'package:flutter_portfolio_website/theme.dart';
 import 'package:flutter_portfolio_website/widgets/custom_appbar.dart';
 import 'package:provider/provider.dart';
@@ -119,22 +118,27 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Row(
         children: [
           Expanded(
-            child: ListView(
-              shrinkWrap: false,
+            child: ScrollAnimator(
               controller: scrollController,
-              children: [
-                AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 100),
-                  transitionBuilder:
-                      (Widget child, Animation<double> animation) {
-                    return FadeTransition(
-                      opacity: animation,
-                      child: child,
-                    );
-                  },
-                  child: pages[currentPageIndex],
-                ),
-              ],
+              scrollSpeed: 5,
+              builder: (context, controller, physics) => ListView(
+                shrinkWrap: false,
+                controller: scrollController,
+                //physics: NeverScrollableScrollPhysics(),
+                children: [
+                  AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 100),
+                    transitionBuilder:
+                        (Widget child, Animation<double> animation) {
+                      return FadeTransition(
+                        opacity: animation,
+                        child: child,
+                      );
+                    },
+                    child: pages[currentPageIndex],
+                  ),
+                ],
+              ),
             ),
           ),
           desktopMode
