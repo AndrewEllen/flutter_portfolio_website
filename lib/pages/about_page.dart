@@ -32,7 +32,7 @@ class AboutPage extends StatelessWidget {
                   image: DecorationImage(
                     fit: phoneMode ? BoxFit.fitHeight : BoxFit.fitWidth,
                     image: AssetImage(
-                      "asset_folder/background.jpg",
+                      "assets/background.jpg",
                     ),
                   )
                 ),
