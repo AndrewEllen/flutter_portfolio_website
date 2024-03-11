@@ -68,9 +68,9 @@ class AboutMeWidget extends StatelessWidget {
                         constraints: const BoxConstraints(
                           maxWidth: 300,
                         ),
-                        child: RichText(
+                        child: SelectableText.rich(
                           textAlign: TextAlign.center,
-                            text: TextSpan(
+                            TextSpan(
                                 text: "Hey, I'm ",
                                 style: defaultTextStyle,
                                 children: [
@@ -131,9 +131,9 @@ class AboutMeWidget extends StatelessWidget {
                     constraints: const BoxConstraints(
                       maxWidth: 300,
                     ),
-                    child: RichText(
+                    child: SelectableText.rich(
                         textAlign: TextAlign.left,
-                        text: TextSpan(
+                        TextSpan(
                             text: "Hey, I'm ",
                             style: defaultTextStyle,
                             children: [

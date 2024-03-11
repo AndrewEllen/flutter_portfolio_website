@@ -34,21 +34,23 @@ class ListItem extends StatelessWidget {
             ),
           ) : const SizedBox.shrink(),
           url != null ? Flexible(
-            child: RichText(
-              text: TextSpan(
-                text: title,
-                style: defaultTextStyle.copyWith(color: Colors.blue),
-                recognizer: TapGestureRecognizer()..onTap = () => openUrl(url: url!),
-                children: [
-                  TextSpan(
-                    text: " || ",
-                    style: defaultTextStyle
-                  ),
-                  TextSpan(
-                      text: "$content.",
-                      style: defaultTextStyle,
-                  ),
-                ]
+            child: SelectionArea(
+              child: SelectableText.rich(
+                TextSpan(
+                  text: title,
+                  style: defaultTextStyle.copyWith(color: Colors.blue),
+                  recognizer: TapGestureRecognizer()..onTap = () => openUrl(url: url!),
+                  children: [
+                    TextSpan(
+                      text: " || ",
+                      style: defaultTextStyle
+                    ),
+                    TextSpan(
+                        text: "$content.",
+                        style: defaultTextStyle,
+                    ),
+                  ]
+                ),
               ),
             ),
           ) : const SizedBox.shrink(),

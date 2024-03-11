@@ -59,149 +59,153 @@ class _MyHomePageState extends State<MyHomePage> {
     var shortestSide = MediaQuery.of(context).size.shortestSide;
     bool desktopMode = shortestSide >= 600;
 
-    return Scaffold(
-      appBar: CustomAppBar(
-        scrollController: scrollController,
-        title: "Andrew Ellen",
-      ),
-      bottomNavigationBar: !desktopMode
-          ? ClipRRect(
-              child: Row(
-                children: [
-                  Expanded(
-                    child: NavigationBarTheme(
-                      data: NavigationBarThemeData(
-                        labelTextStyle: MaterialStateProperty.resolveWith<TextStyle>(
-                              (Set<MaterialState> states) => states.contains(MaterialState.selected)
-                              ? const TextStyle(color: Colors.white)
-                              : const TextStyle(color: Colors.white),
+    return SelectionArea(
+      child: Scaffold(
+        appBar: CustomAppBar(
+          scrollController: scrollController,
+          title: "Andrew Ellen",
+        ),
+        bottomNavigationBar: !desktopMode
+            ? ClipRRect(
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: NavigationBarTheme(
+                        data: NavigationBarThemeData(
+                          labelTextStyle: MaterialStateProperty.resolveWith<TextStyle>(
+                                (Set<MaterialState> states) => states.contains(MaterialState.selected)
+                                ? const TextStyle(color: Colors.white)
+                                : const TextStyle(color: Colors.white),
+                          ),
+                        ),
+                        child: NavigationBar(
+                          backgroundColor: appBarColour,
+                          destinations: const [
+                            NavigationDestination(
+                              selectedIcon: Icon(
+                                Icons.person,
+                              ),
+                              icon: Icon(
+                                Icons.person,
+                                color: Colors.white,
+                              ),
+                              label: "About Me",
+                            ),
+                            NavigationDestination(
+                              selectedIcon: Icon(
+                                Icons.book,
+                              ),
+                              icon: Icon(
+                                Icons.book,
+                                color: Colors.white,
+                              ),
+                              label: "Portfolio",
+                            ),
+                          ],
+                          onDestinationSelected: (int index) {
+                            setState(() {
+                              currentPageIndex = index;
+                            });
+                            context.read<ThemeProvider>().changeScrollState(false);
+                          },
+                          selectedIndex: currentPageIndex,
                         ),
                       ),
-                      child: NavigationBar(
-                        backgroundColor: appBarColour,
-                        destinations: const [
-                          NavigationDestination(
-                            selectedIcon: Icon(
-                              Icons.person,
-                            ),
-                            icon: Icon(
-                              Icons.person,
-                              color: Colors.white,
-                            ),
-                            label: "About Me",
-                          ),
-                          NavigationDestination(
-                            selectedIcon: Icon(
-                              Icons.book,
-                            ),
-                            icon: Icon(
-                              Icons.book,
-                              color: Colors.white,
-                            ),
-                            label: "Portfolio",
-                          ),
-                        ],
-                        onDestinationSelected: (int index) {
-                          setState(() {
-                            currentPageIndex = index;
-                          });
-                          context.read<ThemeProvider>().changeScrollState(false);
-                        },
-                        selectedIndex: currentPageIndex,
-                      ),
                     ),
-                  ),
-                ],
-              ),
-            )
-          : const SizedBox.shrink(),
-      body: Row(
-        children: [
-          Expanded(
-            child: ScrollAnimator(
-              controller: scrollController,
-              scrollSpeed: 5,
-              builder: (context, controller, physics) => ListView(
-                shrinkWrap: false,
-                controller: scrollController,
-                //physics: NeverScrollableScrollPhysics(),
-                children: [
-                  AnimatedSwitcher(
-                    duration: const Duration(milliseconds: 100),
-                    transitionBuilder:
-                        (Widget child, Animation<double> animation) {
-                      return FadeTransition(
-                        opacity: animation,
-                        child: child,
-                      );
-                    },
-                    child: pages[currentPageIndex],
-                  ),
-                ],
-              ),
-            ),
-          ),
-          desktopMode
-              ? NavigationRail(
-            selectedLabelTextStyle: const TextStyle(color: Colors.white),
-            unselectedLabelTextStyle: const TextStyle(color: Colors.white),
-            backgroundColor: appBarColour,
-            leading: AnimatedSwitcher(
-              duration: const Duration(milliseconds: 250),
-              transitionBuilder:
-                  (Widget child, Animation<double> animation) {
-                return SlideTransition(
-                  position: Tween(
-                    begin: const Offset(0.0, -1.2),
-                    end: const Offset(0.0, 0.0),
-                  ).animate(animation),
-                  child: child,
-                );
-              },
-              child: context.watch<ThemeProvider>().isScrolled
-                  ? IconButton(
-                onPressed: () =>
-                    context.read<ThemeProvider>().changeThemeMode(),
-                icon: const Icon(
-                  Icons.sunny,
-                  color: Colors.white,
+                  ],
                 ),
               )
-                  : null,
-            ),
-            labelType: NavigationRailLabelType.all,
-            destinations: const [
-              NavigationRailDestination(
-                selectedIcon: Icon(
-                  Icons.person,
+            : const SizedBox.shrink(),
+        body: SafeArea(
+          child: Row(
+            children: [
+              Expanded(
+                child: ScrollAnimator(
+                  controller: scrollController,
+                  scrollSpeed: 5,
+                  builder: (context, controller, physics) => ListView(
+                    shrinkWrap: false,
+                    controller: scrollController,
+                    //physics: NeverScrollableScrollPhysics(),
+                    children: [
+                      AnimatedSwitcher(
+                        duration: const Duration(milliseconds: 100),
+                        transitionBuilder:
+                            (Widget child, Animation<double> animation) {
+                          return FadeTransition(
+                            opacity: animation,
+                            child: child,
+                          );
+                        },
+                        child: pages[currentPageIndex],
+                      ),
+                    ],
+                  ),
                 ),
-                icon: Icon(
-                  Icons.person,
-                  color: Colors.white,
-                ),
-                label: Text("About Me"),
               ),
-              NavigationRailDestination(
-                selectedIcon: Icon(
-                  Icons.book,
+              desktopMode
+                  ? NavigationRail(
+                selectedLabelTextStyle: const TextStyle(color: Colors.white),
+                unselectedLabelTextStyle: const TextStyle(color: Colors.white),
+                backgroundColor: appBarColour,
+                leading: AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 250),
+                  transitionBuilder:
+                      (Widget child, Animation<double> animation) {
+                    return SlideTransition(
+                      position: Tween(
+                        begin: const Offset(0.0, -1.2),
+                        end: const Offset(0.0, 0.0),
+                      ).animate(animation),
+                      child: child,
+                    );
+                  },
+                  child: context.watch<ThemeProvider>().isScrolled
+                      ? IconButton(
+                    onPressed: () =>
+                        context.read<ThemeProvider>().changeThemeMode(),
+                    icon: const Icon(
+                      Icons.sunny,
+                      color: Colors.white,
+                    ),
+                  )
+                      : null,
                 ),
-                icon: Icon(
-                  Icons.book,
-                  color: Colors.white,
-                ),
-                label: Text("Portfolio"),
-              ),
+                labelType: NavigationRailLabelType.all,
+                destinations: const [
+                  NavigationRailDestination(
+                    selectedIcon: Icon(
+                      Icons.person,
+                    ),
+                    icon: Icon(
+                      Icons.person,
+                      color: Colors.white,
+                    ),
+                    label: Text("About Me"),
+                  ),
+                  NavigationRailDestination(
+                    selectedIcon: Icon(
+                      Icons.book,
+                    ),
+                    icon: Icon(
+                      Icons.book,
+                      color: Colors.white,
+                    ),
+                    label: Text("Portfolio"),
+                  ),
+                ],
+                onDestinationSelected: (int index) {
+                  setState(() {
+                    currentPageIndex = index;
+                  });
+                  context.read<ThemeProvider>().changeScrollState(false);
+                },
+                selectedIndex: currentPageIndex,
+              )
+                  : const SizedBox.shrink(),
             ],
-            onDestinationSelected: (int index) {
-              setState(() {
-                currentPageIndex = index;
-              });
-              context.read<ThemeProvider>().changeScrollState(false);
-            },
-            selectedIndex: currentPageIndex,
-          )
-              : const SizedBox.shrink(),
-        ],
+          ),
+        ),
       ),
     );
   }

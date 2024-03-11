@@ -8,12 +8,14 @@ class PortfolioPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
-      children: [
-
-        PortfolioSection(),
-
-      ],
+    return const SelectionArea(
+      child: Column(
+        children: [
+      
+          PortfolioSection(),
+      
+        ],
+      ),
     );
   }
 }
