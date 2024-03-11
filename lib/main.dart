@@ -124,7 +124,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   controller: scrollController,
                   scrollSpeed: 5,
                   builder: (context, controller, physics) => ListView(
-                    shrinkWrap: false,
+                    shrinkWrap: true,
+                    cacheExtent: 400,
                     controller: scrollController,
                     //physics: NeverScrollableScrollPhysics(),
                     children: [
