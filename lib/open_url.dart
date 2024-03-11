@@ -1,8 +1,10 @@
-// ignore: avoid_web_libraries_in_flutter
-import 'dart:js' as js;
 
-void openUrl({required String url}) {
+import 'package:url_launcher/url_launcher.dart';
 
-  js.context.callMethod('open', [url]);
+Future<void> openUrl({required String url}) async {
+
+  if (!await launchUrl(Uri.parse(url))) {
+    throw Exception('Could not launch $url');
+  }
 
 }

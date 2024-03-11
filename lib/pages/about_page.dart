@@ -1,9 +1,6 @@
 
 import 'dart:ui';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import '../widgets/about_me.dart';
 import '../widgets/achievements_and_qualifications.dart';
